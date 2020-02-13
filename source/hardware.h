@@ -45,7 +45,7 @@ int hardwareInit();
  *
  * @param movement Commanded movement.
  */
-void hardwareCommanMovement(HardwareMovement movement);
+void hardwareCommandMovement(HardwareMovement movement);
 
 /**
  * @brief Polls the hardware for the current stop signal.
