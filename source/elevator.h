@@ -14,7 +14,7 @@ typedef enum State {
 } State;
 
 
-typedef struct Elevator {
+typedef struct {
     State state;
     int current_floor;
     bool floor_sensor_triggered;
