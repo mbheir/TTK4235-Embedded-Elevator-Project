@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
+#include "elevator.h"
+#include "fsm.h"
+
 
 int main(){
     int error = hardwareInit();
