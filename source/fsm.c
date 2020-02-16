@@ -3,3 +3,7 @@
  */
 
 #include "fsm.h"
+
+void fsmStandby() {
+
+}
