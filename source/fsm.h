@@ -2,17 +2,18 @@
  * @file
  * @brief header file for Finite State Machine
  */
-
-#include "hardware.h"
-
-void standby();
-
-void doorsOpen();
-
-void goingUp();
-
-void goingDown();
-
-void emergency();
+#ifndef FSM_H
+#define FSM_H1
 
 
+void fsmStandby();
+
+void fsmDoorsOpen();
+
+void fsmGoingUp();
+
+void fsmGoingDown();
+
+void fsmEmergency();
+
+#endif
