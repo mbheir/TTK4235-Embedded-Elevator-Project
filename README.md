@@ -1,4 +1,4 @@
-# heislab
+# HeisAnn!
 Heisprosjekt i tilpdat vår 2020
 
 Klassediagram
