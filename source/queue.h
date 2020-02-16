@@ -6,20 +6,14 @@
 
 #include <stdbool.h>
 #include "hardware.h"
+#include "elevator.h"
 
 
-typedef struct Queue {
-    int up[4];
-    int down[4];
-    int inside[4];
-} Queue;
+void queueUpdateFromButtons(Elevator *elevator);
+
+void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator);
 
 
-void queueUpdateFromButtons(int *buttons);
-
-void queueRemoveElement(int *queue, int floor);
-
-bool queueCheckIfInFloor(Queue queue, int code, int floor);
 
 
 

@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "fsm.h": "c"
+        "fsm.h": "c",
+        "queue.h": "c",
+        "cmath": "c",
+        "chrono": "c"
     }
 }
