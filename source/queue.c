@@ -27,7 +27,7 @@ void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator) {
     }
 }
 
-bool orderInCurrentDirection(int order_floor, int current_floor, bool last_direction){
+bool queueOrderInCurrentDirection(int order_floor, int current_floor, bool last_direction){
 	bool potential_direction;
 	if (order_floor>current_floor){
 		potential_direction = true;
@@ -35,8 +35,30 @@ bool orderInCurrentDirection(int order_floor, int current_floor, bool last_direc
 	else if(order_floor<current_floor){
 		potential_direction = false;
 	}
-	else return true
+	else return true;
 		
 	return (last_direction && potential_direction);  
 
+}
+
+bool queueOrderExist(Elevator *elevator){
+	for(unsigned int i=0, i<4,i++){
+		if(elevator->queue.up[i] || elevator->queue.down[i] || elevator->queue.inside[i]){
+			return true;
+		}
+	}
+	return false;
+
+}
+
+void queueClearAllOrdersOnFloor(int floor, Elevator *elevator){
+	for(unsigned int i =0;i<4,i++){
+		elevator->queue.up[i]=false;
+		elevator->queue.down[i]=false;
+		elevator->queue.inside[i]=false;
+	}
+}
+
+void queueRemoveElementFromQueue(array *queue, int floor){
+	*queue[floor]=false;
 }
