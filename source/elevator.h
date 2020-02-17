@@ -2,6 +2,9 @@
  * @file
  * @brief Elevator objekt
  */
+#ifndef ELEVATOR_H
+#define ELEVATOR_H
+
 #include <stdbool.h>
 #include "queue.h"
 
@@ -23,8 +26,8 @@ typedef struct Queue {
 
 
 
-typedef struct Elevator{
-    State state;
+typedef struct Elevator {
+    State state;    
     int current_floor;
     bool floor_sensor_triggered;
     bool emergency_stop;
@@ -32,3 +35,5 @@ typedef struct Elevator{
     bool last_direction;
     Queue queue;
 }  Elevator;
+
+#endif
