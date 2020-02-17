@@ -1,4 +1,5 @@
 #include "LightControl.h"
+
 void lightUpdateFromQueue(bool *up_queue, bool *down_queue, bool *inside_queue) {
 	for (int i =0, i<4, i++) {
 		if ((*up_que+i) = true) {
