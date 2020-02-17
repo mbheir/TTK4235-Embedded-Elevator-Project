@@ -27,7 +27,7 @@ void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator) {
 	}
 }
 
-bool queueOrderExist(Elevator *elevator){
+bool queueCheckIfAnyOrderExist(Elevator *elevator){
 	for(unsigned int i=0; i<HARDWARE_NUMBER_OF_FLOORS;i++){
 		if(elevator->queue.up[i] || elevator->queue.down[i] || elevator->queue.inside[i]){
 			return true;

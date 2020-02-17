@@ -19,12 +19,14 @@ int main(){
     hardwareCommandMovement(HARDWARE_MOVEMENT_UP);
 
 
-    State state = STANDBY;
+    Elevator *p_elevator = (Elevator*)malloc(sizeof(Elevator));
+
+    p_elevator->state = STANDBY;
 
     while(true){
 
         
-        switch (state)
+        switch (p_elevator->state)
         {
         case STANDBY:
             fsmStandby(); 

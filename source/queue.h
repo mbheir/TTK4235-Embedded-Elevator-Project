@@ -9,7 +9,7 @@
 //#include "elevator.h"
 
 
-typedef enum State { 
+typedef enum { 
     STANDBY, 
     DOORS_OPEN, 
     GOING_UP, 
@@ -41,7 +41,7 @@ void queueUpdateFromButtons(Elevator *elevator);
 
 void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator);
 
-bool queueOrderExist(Elevator *elevator);
+bool queueCheckIfAnyOrderExist(Elevator *elevator);
 
 void queueClearAllOrdersOnFloor(int floor, Elevator *elevator);
 
