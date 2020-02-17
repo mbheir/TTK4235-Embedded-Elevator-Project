@@ -13,6 +13,8 @@ void queueUpdateFromButtons(Elevator *elevator);
 
 void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator);
 
+bool orderInCurrentDirection(int floor, int last_direction);
+
 
 
 

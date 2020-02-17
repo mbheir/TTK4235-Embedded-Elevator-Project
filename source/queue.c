@@ -26,3 +26,17 @@ void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator) {
         break;
     }
 }
+
+bool orderInCurrentDirection(int order_floor, int current_floor, bool last_direction){
+	bool potential_direction;
+	if (order_floor>current_floor){
+		potential_direction = true;
+	}
+	else if(order_floor<current_floor){
+		potential_direction = false;
+	}
+	else return true
+		
+	return (last_direction && potential_direction);  
+
+}
