@@ -5,6 +5,7 @@
 #include "elevator.h"
 #include "fsm.h"
 #include "queue.h"
+#include "LightControl.h"
 
 int main(){
     int error = hardwareInit();
@@ -14,24 +15,29 @@ int main(){
     }
 
     printf("=== Example Program ===\n");
-    printf("Press the stop button on the elevator panel to exit\n");
+    printf("Press the stop button on the elevator panel to EXIT\n");
+    
 
-    hardwareCommandMovement(HARDWARE_MOVEMENT_UP);
+    Elevator *elevator = (Elevator*)malloc(sizeof(Elevator));
 
+    elevator->state = INIT;
 
-    Elevator *p_elevator = (Elevator*)malloc(sizeof(Elevator));
-
-    p_elevator->state = STANDBY;
+    
 
     while(true){
 
         
-        switch (p_elevator->state)
+        switch (elevator->state)
         {
+
+        case INIT:
+            fsmInit(elevator);
+            break;
         case STANDBY:
-            fsmStandby(); 
+            fsmStandby(elevator); 
             break;
         case DOORS_OPEN:
+            fsmDoorsOpen(elevator);
             break;
         case GOING_UP:
             break;

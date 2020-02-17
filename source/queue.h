@@ -9,7 +9,8 @@
 //#include "elevator.h"
 
 
-typedef enum { 
+typedef enum {
+    INIT, 
     STANDBY, 
     DOORS_OPEN, 
     GOING_UP, 
@@ -47,6 +48,9 @@ void queueClearAllOrdersOnFloor(int floor, Elevator *elevator);
 
 void queueRemoveElementFromQueue(bool queue[], int floor);
 
+bool queueCheckIfAnyOrderOnFloor(int floor, Queue queue);
+
+void queueClearAllOrders(Elevator *elevator);
 
 
 #endif

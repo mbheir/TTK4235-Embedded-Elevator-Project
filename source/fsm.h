@@ -5,14 +5,21 @@
 #ifndef FSM_H
 #define FSM_H1
 
+#include <stdio.h>
+#include <time.h>
+#include "hardware.h"
+#include "LightControl.h"
+#include "queue.h"
 
-void fsmStandby();
+void fsmInit(Elevator *elevator);
 
-void fsmDoorsOpen();
+void fsmStandby(Elevator *elevator);
 
-void fsmGoingUp();
+void fsmDoorsOpen(Elevator *elevator);
 
-void fsmGoingDown();
+void fsmGoingUp(Elevator *elevator);
+
+void fsmGoingDown(Elevator *elevator);
 
 void fsmEmergency();
 

@@ -2,8 +2,8 @@
 
 void queueUpdateFromButtons(Elevator *elevator) {
 
-    for (int floor; floor < HARDWARE_NUMBER_OF_FLOORS; ++floor) {
-        for (HardwareOrder order = HARDWARE_ORDER_UP; order != HARDWARE_ORDER_DOWN; ++order) {
+    for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; ++floor) {
+        for (HardwareOrder order = HARDWARE_ORDER_UP; order <= HARDWARE_ORDER_DOWN; ++order) {
             if (hardwareReadOrder(floor,order)) {
                 queueAddOrderToQueue(floor,order, elevator);
             }   
@@ -36,13 +36,24 @@ bool queueCheckIfAnyOrderExist(Elevator *elevator){
 	return false;
 }
 
+
+bool queueCheckIfAnyOrderOnFloor(int floor, Queue queue) {
+	return (queue.down[floor] || queue.up[floor] || queue.inside[floor]);
+}
+
 void queueClearAllOrdersOnFloor(int floor, Elevator *elevator){
 	elevator->queue.up[floor]=false;
 	elevator->queue.down[floor]=false;
 	elevator->queue.inside[floor]=false;
 }
 
+void queueClearAllOrders(Elevator *elevator) {
+	for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+		queueClearAllOrdersOnFloor(floor,elevator);
+	}
+}
 
-void queueRemoveElementFromQueue(bool queue[], int floor){
+
+void queueRemoveElementFromQueue(bool queue[], int floor){  //NB!! Tror ikke denne kommer til å funke !
 	queue[floor]=false;
 }
