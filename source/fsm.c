@@ -8,6 +8,7 @@ void fsmInit(Elevator *elevator) {
     printf("Entering state INIT\n");
 
     queueClearAllOrders(elevator);
+    elevator->direction = false;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true) {
@@ -23,20 +24,29 @@ void fsmInit(Elevator *elevator) {
 
 void fsmStandby(Elevator *elevator) {
     printf("Entering state STANDBY\n");
-    
-    while (true) {
+
+    while (elevator->state == STANDBY) {
 
         queueUpdateFromButtons(elevator);
+        lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
 
         if (queueCheckIfAnyOrderExist(elevator)) {
-            lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
 
 
             if (queueCheckIfAnyOrderOnFloor(elevator->current_floor,elevator->queue)) {
                 elevator->state = DOORS_OPEN;
                 break;
             }
-
+            if (queueCheckIfOrderInSameDirection(elevator->queue,elevator->current_floor,elevator->direction)) {
+                if (elevator->direction) elevator->state = GOING_UP;
+                else elevator->state = GOING_DOWN;
+                break;
+            }
+            else {
+                if (elevator->direction) elevator->state = GOING_DOWN;
+                else elevator->state = GOING_UP;
+                break;
+            }
         }
     }
 }
@@ -67,6 +77,9 @@ void fsmDoorsOpen(Elevator *elevator) {
 
 
 void fsmGoingUp(Elevator *elevator) {
+    printf("Entering state GOING_UP\n");
+
+    elevator->direction = true;
     hardwareCommandMovement(HARDWARE_MOVEMENT_UP);
 
     while (true){
@@ -83,6 +96,9 @@ void fsmGoingUp(Elevator *elevator) {
 
 
 void fsmGoingDown(Elevator *elevator) {
+    printf("Entering state GOING_DOWN\n");
+
+    elevator->direction = false;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true){

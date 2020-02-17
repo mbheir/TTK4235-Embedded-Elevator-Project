@@ -22,7 +22,6 @@ int main(){
 
     elevator->state = INIT;
 
-    
 
     while(true){
 
@@ -40,8 +39,10 @@ int main(){
             fsmDoorsOpen(elevator);
             break;
         case GOING_UP:
+            fsmGoingUp(elevator);
             break;
         case GOING_DOWN:
+            fsmGoingDown(elevator);
             break;
         case EMERGENCY:
             break;
