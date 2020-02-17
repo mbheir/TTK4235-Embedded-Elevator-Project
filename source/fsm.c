@@ -77,6 +77,7 @@ void fsmGoingUp(Elevator *elevator) {
             break;
         }
     }
+    hardwareCommandMovement(HARDWARE_MOVEMENT_STOP);
     elevator->state = STANDBY;
 }
 
@@ -92,5 +93,6 @@ void fsmGoingDown(Elevator *elevator) {
             break;
         }
     }
+    hardwareCommandMovement(HARDWARE_MOVEMENT_STOP);
     elevator->state = STANDBY;
 }
