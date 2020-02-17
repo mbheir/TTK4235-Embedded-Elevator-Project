@@ -57,3 +57,23 @@ void queueClearAllOrders(Elevator *elevator) {
 void queueRemoveElementFromQueue(bool queue[], int floor){  //NB!! Tror ikke denne kommer til å funke !
 	queue[floor]=false;
 }
+
+bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direction) {
+	if (direction) {
+		for (int floor=current_floor+1; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+			if (queue.down[floor] || queue.up[floor] || queue.inside[floor]) {
+				return true;
+			}
+		}
+		return false;
+	}
+	else {
+		for (int floor=current_floor-1; floor >= 0; floor--) {
+			if (queue.down[floor] || queue.up[floor] || queue.inside[floor]) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+}
