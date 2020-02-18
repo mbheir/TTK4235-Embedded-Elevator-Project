@@ -99,7 +99,7 @@ void fsmDoorsOpen(Elevator *elevator) {
 void fsmGoingUp(Elevator *elevator) {
     printf("Entering state GOING_UP\n");
 
-    elevator->direction = true;
+    if (hardwareReadFloorSensor(elevator->current_floor)) elevator->direction = true;
     hardwareCommandMovement(HARDWARE_MOVEMENT_UP);
 
     while (true){
@@ -125,7 +125,7 @@ void fsmGoingUp(Elevator *elevator) {
 void fsmGoingDown(Elevator *elevator) {
     printf("Entering state GOING_DOWN\n");
 
-    elevator->direction = false;
+    if (hardwareReadFloorSensor(elevator->current_floor)) elevator->direction = false;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true){
