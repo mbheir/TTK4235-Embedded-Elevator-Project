@@ -78,3 +78,21 @@ bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direct
 	}
 	
 }
+
+bool queueLastOrderInDirection(Elevator *elevator){
+	if (elevator->direction){
+		for (unsigned int i=(elevator->current_floor+1); i<HARDWARE_NUMBER_OF_FLOORS;i++){
+			if (queueCheckIfAnyOrderOnFloor(i,elevator->queue)){
+				return false;	
+			}
+		}
+	}
+	else{
+		for(unsigned int i=0; i<(elevator->current_floor);i++){
+			if(queueCheckIfAnyOrderOnFloor(i,elevator->queue)){
+				return false;	
+			}
+		}
+	}
+	return true;
+}

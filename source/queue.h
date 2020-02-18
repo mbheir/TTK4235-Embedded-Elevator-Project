@@ -55,5 +55,6 @@ void queueClearAllOrders(Elevator *elevator);
 
 bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direction);
 
+bool queueLastOrderInDirection(Elevator *elevator);
 
 #endif

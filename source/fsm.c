@@ -97,9 +97,9 @@ void fsmGoingUp(Elevator *elevator) {
             elevator->lights_updated = true;
         }
 
-        if (checkAndUpdateFloor(elevator) && (elevator->queue.up[elevator->current_floor] || elevator->queue.inside[elevator->current_floor])) {
+        if (checkAndUpdateFloor(elevator) && ((elevator->queue.up[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) || (queueLastOrderInDirection(elevator) && elevator->queue.down[elevator->current_floor]))) {
             break;
-        }
+	}
     }
     hardwareCommandMovement(HARDWARE_MOVEMENT_STOP);
     elevator->state = STANDBY;
@@ -119,10 +119,11 @@ void fsmGoingDown(Elevator *elevator) {
             elevator->lights_updated = true;
         }
 
-        if (checkAndUpdateFloor(elevator) && (elevator->queue.down[elevator->current_floor] || elevator->queue.inside[elevator->current_floor])) {
+        if (checkAndUpdateFloor(elevator) && ((elevator->queue.down[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) || (queueLastOrderInDirection(elevator) && elevator->queue.up[elevator->current_floor]))) {
             break;
         }
     }
     hardwareCommandMovement(HARDWARE_MOVEMENT_STOP);
     elevator->state = STANDBY;
+
 }
