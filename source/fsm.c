@@ -85,17 +85,13 @@ void fsmDoorsOpen(Elevator *elevator) {
 
         time(&end_time);
         diff_time = difftime(end_time,start_time);
-	if(hardwareReadStopSignal() == 1){
-		elevator->state = EMERGENCY;
-		hardwareCommandDoorOpen(0);
-	        break;	
-	}
 	if(diff_time>3){
 		elevator->state = STANDBY;
-		 hardwareCommandDoorOpen(0);
+		hardwareCommandDoorOpen(0);
 		break;	
 	}
-    }
+
+	}
     queueClearAllOrdersOnFloor(elevator->current_floor,elevator);
 }
 
@@ -154,12 +150,17 @@ void fsmGoingDown(Elevator *elevator) {
 
 void fsmEmergency(Elevator *elevator){
 	printf("Entering state EMERGENCY\n");
-
+	queueClearAllOrders(elevator);
+	hardwareCommandStopLight(1);
+	if (hardwareReadFloorSensor(elevator->current_floor)){
+		hardwareCommandDoorOpen(1);
+	}
+	while(hardwareReadStopSignal()){}
 	if(hardwareReadFloorSensor(elevator->current_floor)){
 		elevator->state = DOORS_OPEN;
 	}
-	else{
+	else {
 		elevator->state = STANDBY;
 	}
-	queueClearAllOrders(elevator);
+	hardwareCommandStopLight(0);
 }
