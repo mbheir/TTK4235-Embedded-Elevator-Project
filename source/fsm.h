@@ -21,6 +21,6 @@ void fsmGoingUp(Elevator *elevator);
 
 void fsmGoingDown(Elevator *elevator);
 
-void fsmEmergency();
+void fsmEmergency(Elevator *elevator);
 
 #endif

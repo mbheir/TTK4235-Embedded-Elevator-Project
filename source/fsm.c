@@ -27,9 +27,12 @@ void fsmStandby(Elevator *elevator) {
     printf("Entering state STANDBY\n");
 
     while (elevator->state == STANDBY) {
-
+	if (hardwareReadStopSignal() == 1){
+		elevator->state = EMERGENCY;
+		break;
+	}
         queueUpdateFromButtons(elevator);
-
+	
         if (!elevator->lights_updated) {
             lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
             elevator->lights_updated = true;
@@ -38,7 +41,7 @@ void fsmStandby(Elevator *elevator) {
         if (queueCheckIfAnyOrderExist(elevator)) {
 
 
-            if (queueCheckIfAnyOrderOnFloor(elevator->current_floor,elevator->queue)) {
+            if (hardwareReadFloorSensor(elevator->current_floor) && (queueCheckIfAnyOrderOnFloor(elevator->current_floor,elevator->queue))) {
                 elevator->state = DOORS_OPEN;
                 break;
             }
@@ -65,22 +68,35 @@ void fsmDoorsOpen(Elevator *elevator) {
 
     hardwareCommandDoorOpen(1);
 
-    while (diff_time < 3) { 
-        queueUpdateFromButtons(elevator);
+    while (true) { 
+        if (hardwareReadStopSignal() == 1){
+		elevator->state = EMERGENCY;
+		break;
+	}
+	queueUpdateFromButtons(elevator);
         if (!elevator->lights_updated) {
             lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
             elevator->lights_updated = true;
         }
-
+	if (hardwareReadObstructionSignal() == 1){
+		time(&start_time);
+	}
 
 
         time(&end_time);
         diff_time = difftime(end_time,start_time);
+	if(hardwareReadStopSignal() == 1){
+		elevator->state = EMERGENCY;
+		hardwareCommandDoorOpen(0);
+	        break;	
+	}
+	if(diff_time>3){
+		elevator->state = STANDBY;
+		 hardwareCommandDoorOpen(0);
+		break;	
+	}
     }
-
-    hardwareCommandDoorOpen(0);
     queueClearAllOrdersOnFloor(elevator->current_floor,elevator);
-    elevator->state = STANDBY;
 }
 
 
@@ -91,6 +107,10 @@ void fsmGoingUp(Elevator *elevator) {
     hardwareCommandMovement(HARDWARE_MOVEMENT_UP);
 
     while (true){
+	if (hardwareReadStopSignal() == 1){
+		elevator->state = EMERGENCY;
+		break;
+	}	    
         queueUpdateFromButtons(elevator);
         if (!elevator->lights_updated) {
             lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
@@ -98,11 +118,11 @@ void fsmGoingUp(Elevator *elevator) {
         }
 
         if (checkAndUpdateFloor(elevator) && ((elevator->queue.up[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) || (queueLastOrderInDirection(elevator) && elevator->queue.down[elevator->current_floor]))) {
-            break;
+		elevator->state = STANDBY;
+	      	break;
 	}
     }
     hardwareCommandMovement(HARDWARE_MOVEMENT_STOP);
-    elevator->state = STANDBY;
 }
 
 
@@ -113,6 +133,10 @@ void fsmGoingDown(Elevator *elevator) {
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true){
+	if (hardwareReadStopSignal() == 1){
+		elevator->state = EMERGENCY;
+		break;
+	}
         queueUpdateFromButtons(elevator);
         if (!elevator->lights_updated) {
             lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
@@ -120,10 +144,22 @@ void fsmGoingDown(Elevator *elevator) {
         }
 
         if (checkAndUpdateFloor(elevator) && ((elevator->queue.down[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) || (queueLastOrderInDirection(elevator) && elevator->queue.up[elevator->current_floor]))) {
-            break;
+		elevator->state = STANDBY;
+	   	break;
         }
     }
     hardwareCommandMovement(HARDWARE_MOVEMENT_STOP);
-    elevator->state = STANDBY;
 
+}
+
+void fsmEmergency(Elevator *elevator){
+	printf("Entering state EMERGENCY\n");
+
+	if(hardwareReadFloorSensor(elevator->current_floor)){
+		elevator->state = DOORS_OPEN;
+	}
+	else{
+		elevator->state = STANDBY;
+	}
+	queueClearAllOrders(elevator);
 }
