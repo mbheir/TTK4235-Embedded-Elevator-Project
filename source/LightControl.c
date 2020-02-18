@@ -21,6 +21,7 @@ void lightUpdateFromQueue(bool up_queue[], bool down_queue[], bool inside_queue[
 			hardwareCommandOrderLight(i, HARDWARE_ORDER_INSIDE, 0);
 		}
 	}
+	
 }
 
 

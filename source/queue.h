@@ -34,6 +34,7 @@ typedef struct Elevator {
     bool emergency_stop;
     bool door_open;
     bool direction; //true is up
+    bool lights_updated;    
     Queue queue;
 }  Elevator;
 

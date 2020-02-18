@@ -9,6 +9,7 @@ void fsmInit(Elevator *elevator) {
 
     queueClearAllOrders(elevator);
     elevator->direction = false;
+    elevator->lights_updated = false;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true) {
@@ -28,7 +29,11 @@ void fsmStandby(Elevator *elevator) {
     while (elevator->state == STANDBY) {
 
         queueUpdateFromButtons(elevator);
-        lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+
+        if (!elevator->lights_updated) {
+            lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+            elevator->lights_updated = true;
+        }
 
         if (queueCheckIfAnyOrderExist(elevator)) {
 
@@ -62,7 +67,10 @@ void fsmDoorsOpen(Elevator *elevator) {
 
     while (diff_time < 3) { 
         queueUpdateFromButtons(elevator);
-        lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+        if (!elevator->lights_updated) {
+            lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+            elevator->lights_updated = true;
+        }
 
 
 
@@ -84,7 +92,10 @@ void fsmGoingUp(Elevator *elevator) {
 
     while (true){
         queueUpdateFromButtons(elevator);
-        lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+        if (!elevator->lights_updated) {
+            lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+            elevator->lights_updated = true;
+        }
 
         if (checkAndUpdateFloor(elevator) && (elevator->queue.up[elevator->current_floor] || elevator->queue.inside[elevator->current_floor])) {
             break;
@@ -103,7 +114,10 @@ void fsmGoingDown(Elevator *elevator) {
 
     while (true){
         queueUpdateFromButtons(elevator);
-        lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+        if (!elevator->lights_updated) {
+            lightUpdateFromQueue(elevator->queue.up,elevator->queue.down,elevator->queue.inside);
+            elevator->lights_updated = true;
+        }
 
         if (checkAndUpdateFloor(elevator) && (elevator->queue.down[elevator->current_floor] || elevator->queue.inside[elevator->current_floor])) {
             break;

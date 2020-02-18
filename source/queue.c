@@ -6,10 +6,10 @@ void queueUpdateFromButtons(Elevator *elevator) {
         for (HardwareOrder order = HARDWARE_ORDER_UP; order <= HARDWARE_ORDER_DOWN; ++order) {
             if (hardwareReadOrder(floor,order)) {
                 queueAddOrderToQueue(floor,order, elevator);
+				elevator->lights_updated = false;
             }   
         }
     }
-
 }
 
 void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator) {
@@ -45,6 +45,7 @@ void queueClearAllOrdersOnFloor(int floor, Elevator *elevator){
 	elevator->queue.up[floor]=false;
 	elevator->queue.down[floor]=false;
 	elevator->queue.inside[floor]=false;
+	elevator->lights_updated = false;
 }
 
 void queueClearAllOrders(Elevator *elevator) {
