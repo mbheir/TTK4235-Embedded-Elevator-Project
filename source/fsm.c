@@ -25,6 +25,7 @@ void fsmInit(Elevator *elevator) {
 
 void fsmStandby(Elevator *elevator) {
     printf("Entering state STANDBY\n");
+    hardwareCommandFloorIndicatorOn(elevator->current_floor);
 
     while (elevator->state == STANDBY) {
 
