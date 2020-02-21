@@ -30,10 +30,7 @@ typedef struct Queue {
 typedef struct Elevator {
     State state;    
     int current_floor; //starting from 0
-    bool floor_sensor_triggered;
-    bool emergency_stop;
-    bool door_open;
-    bool direction; //true is up
+    bool last_direction_up; //true is up
     bool lights_updated;    
     Queue queue;
 }  Elevator;

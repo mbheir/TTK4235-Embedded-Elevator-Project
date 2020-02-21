@@ -5,7 +5,7 @@ void queueUpdateFromButtons(Elevator *elevator) {
     for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; ++floor) {
         for (HardwareOrder order = HARDWARE_ORDER_UP; order <= HARDWARE_ORDER_DOWN; ++order) {
             if (hardwareReadOrder(floor,order)) {
-                queueAddOrderToQueue(floor,order, elevator);
+                queueAddOrderToQueue(floor,order,elevator);
 				elevator->lights_updated = false;
             }   
         }
@@ -80,7 +80,7 @@ bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direct
 }
 
 bool queueLastOrderInDirection(Elevator *elevator){
-	if (elevator->direction){
+	if (elevator->last_direction_up){
 		for (unsigned int i=(elevator->current_floor+1); i<HARDWARE_NUMBER_OF_FLOORS;i++){
 			if (queueCheckIfAnyOrderOnFloor(i,elevator->queue)){
 				return false;	
