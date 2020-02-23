@@ -123,7 +123,7 @@ void fsmGoingUp(Elevator *elevator) {
 
             if (   checkAndUpdateFloor(elevator) 
                 && ((elevator->queue.up[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) 
-                || (queueLastOrderInDirection(elevator) && elevator->queue.down[elevator->current_floor]))) 
+                || (queueCheckIfLastOrderInDirection(elevator) && elevator->queue.down[elevator->current_floor]))) 
             {
                 elevator->state = STANDBY;
                 break;
@@ -154,7 +154,7 @@ void fsmGoingDown(Elevator *elevator) {
 
         if (checkAndUpdateFloor(elevator) 
             && ((elevator->queue.down[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) 
-            || (queueLastOrderInDirection(elevator) && elevator->queue.up[elevator->current_floor]))) 
+            || (queueCheckIfLastOrderInDirection(elevator) && elevator->queue.up[elevator->current_floor]))) 
         {
             elevator->state = STANDBY;
             break;

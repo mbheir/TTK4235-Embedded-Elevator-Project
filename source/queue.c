@@ -74,7 +74,7 @@ bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direct
 	
 }
 
-bool queueLastOrderInDirection(Elevator *elevator){
+bool queueCheckIfLastOrderInDirection(Elevator *elevator){
 	if (elevator->direction_from_floor_up){
 		for (int floor = (elevator->current_floor+1); floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
 			if (queueCheckIfAnyOrderOnFloor(floor,elevator->queue)){
