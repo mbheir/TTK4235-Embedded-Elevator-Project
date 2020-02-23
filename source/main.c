@@ -39,7 +39,7 @@ int main(){
             fsmGoingDown(elevator);
             break;
         case EMERGENCY:
-	    fsmEmergency(elevator);
+	        fsmEmergency(elevator);
             break;
         }
         

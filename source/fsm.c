@@ -8,7 +8,7 @@ void fsmInit(Elevator *elevator) {
     printf("Entering state INIT\n");
 
     queueClearAllOrders(elevator);
-    elevator->last_direction_up = false;
+    elevator->direction_from_floor_up = false;
     elevator->lights_updated = false;
     elevator->current_floor = -1;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
@@ -53,13 +53,13 @@ void fsmStandby(Elevator *elevator) {
                 break;
             }
 
-            if (queueCheckIfOrderInSameDirection(elevator->queue,elevator->current_floor,elevator->last_direction_up)) {
-                if (elevator->last_direction_up) elevator->state = GOING_UP;
+            if (queueCheckIfOrderInSameDirection(elevator->queue,elevator->current_floor,elevator->direction_from_floor_up)) {
+                if (elevator->direction_from_floor_up) elevator->state = GOING_UP;
                 else elevator->state = GOING_DOWN;
                 break;
             }
             else {
-                if (elevator->last_direction_up) elevator->state = GOING_DOWN;
+                if (elevator->direction_from_floor_up) elevator->state = GOING_DOWN;
                 else elevator->state = GOING_UP;
                 break;
             }
@@ -106,7 +106,7 @@ void fsmDoorsOpen(Elevator *elevator) {
 void fsmGoingUp(Elevator *elevator) {
     printf("Entering state GOING_UP\n");
 
-    if (hardwareReadFloorSensor(elevator->current_floor)) elevator->last_direction_up = true;
+    if (hardwareReadFloorSensor(elevator->current_floor)) elevator->direction_from_floor_up = true;
     hardwareCommandMovement(HARDWARE_MOVEMENT_UP);
 
     while (true){
@@ -137,7 +137,7 @@ void fsmGoingUp(Elevator *elevator) {
 void fsmGoingDown(Elevator *elevator) {
     printf("Entering state GOING_DOWN\n");
 
-    if (hardwareReadFloorSensor(elevator->current_floor)) elevator->last_direction_up = false;
+    if (hardwareReadFloorSensor(elevator->current_floor)) elevator->direction_from_floor_up = false;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true){

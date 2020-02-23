@@ -28,7 +28,7 @@ void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator) {
 }
 
 bool queueCheckIfAnyOrderExist(Elevator *elevator){
-	for(unsigned int i=0; i<HARDWARE_NUMBER_OF_FLOORS;i++){
+	for(int i = 0; i < HARDWARE_NUMBER_OF_FLOORS;i++){
 		if(elevator->queue.up[i] || elevator->queue.down[i] || elevator->queue.inside[i]){
 			return true;
 		}
@@ -54,14 +54,9 @@ void queueClearAllOrders(Elevator *elevator) {
 	}
 }
 
-
-void queueRemoveElementFromQueue(bool queue[], int floor){  //NB!! Tror ikke denne kommer til å funke !
-	queue[floor]=false;
-}
-
 bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direction) {
 	if (direction) {
-		for (int floor=current_floor+1; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+		for (int floor = current_floor+1; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
 			if (queue.down[floor] || queue.up[floor] || queue.inside[floor]) {
 				return true;
 			}
@@ -69,7 +64,7 @@ bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direct
 		return false;
 	}
 	else {
-		for (int floor=current_floor-1; floor >= 0; floor--) {
+		for (int floor = current_floor-1; floor >= 0; floor--) {
 			if (queue.down[floor] || queue.up[floor] || queue.inside[floor]) {
 				return true;
 			}
@@ -80,16 +75,16 @@ bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direct
 }
 
 bool queueLastOrderInDirection(Elevator *elevator){
-	if (elevator->last_direction_up){
-		for (unsigned int i=(elevator->current_floor+1); i<HARDWARE_NUMBER_OF_FLOORS;i++){
-			if (queueCheckIfAnyOrderOnFloor(i,elevator->queue)){
+	if (elevator->direction_from_floor_up){
+		for (int floor = (elevator->current_floor+1); floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
+			if (queueCheckIfAnyOrderOnFloor(floor,elevator->queue)){
 				return false;	
 			}
 		}
 	}
 	else{
-		for(unsigned int i=0; i<(elevator->current_floor);i++){
-			if(queueCheckIfAnyOrderOnFloor(i,elevator->queue)){
+		for(int floor = 0; floor < (elevator->current_floor); floor++){
+			if(queueCheckIfAnyOrderOnFloor(floor,elevator->queue)){
 				return false;	
 			}
 		}

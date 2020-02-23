@@ -11,7 +11,12 @@
 #include "LightControl.h"
 #include "queue.h"
 
+/**
+ * @brief Inital state. Sets necessar
+ * @param
+ */
 void fsmInit(Elevator *elevator);
+
 
 void fsmStandby(Elevator *elevator);
 
