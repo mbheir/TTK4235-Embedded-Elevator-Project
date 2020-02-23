@@ -54,7 +54,7 @@ void queueClearAllOrders(Elevator *elevator) {
 	}
 }
 
-bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, int direction) {
+bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, bool direction) {
 	if (direction) {
 		for (int floor = current_floor+1; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
 			if (queue.down[floor] || queue.up[floor] || queue.inside[floor]) {
