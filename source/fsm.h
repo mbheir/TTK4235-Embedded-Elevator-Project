@@ -17,7 +17,6 @@
  */
 void fsmInit(Elevator *elevator);
 
-
 void fsmStandby(Elevator *elevator);
 
 void fsmDoorsOpen(Elevator *elevator);

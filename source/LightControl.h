@@ -7,6 +7,4 @@
 
 void lightUpdateFromQueue(Queue queue);
 
-bool checkAndUpdateFloor(Elevator *elevator);
-
 #endif
