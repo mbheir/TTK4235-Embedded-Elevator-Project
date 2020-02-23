@@ -8,27 +8,21 @@
 #include "LightControl.h"
 
 int main(){
-    int error = hardwareInit();
-    if(error != 0){
+    bool error = hardwareInit();
+    if(error){
         fprintf(stderr, "Unable to initialize hardware\n");
         exit(1);
     }
 
-    printf("=== Example Program ===\n");
-    printf("Press the stop button on the elevator panel to EXIT\n");
+    printf("=== Elevator Running ===\n");
     
 
     Elevator *elevator = (Elevator*)malloc(sizeof(Elevator));
-
     elevator->state = INIT;
-
 
     while(true){
 
-        
-        switch (elevator->state)
-        {
-
+        switch (elevator->state) {
         case INIT:
             fsmInit(elevator);
             break;
@@ -45,11 +39,10 @@ int main(){
             fsmGoingDown(elevator);
             break;
         case EMERGENCY:
-	    fsmEmergency(elevator);
+	        fsmEmergency(elevator);
             break;
         }
-
+        
     }
-
     return 0;
 }

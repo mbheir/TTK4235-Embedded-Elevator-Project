@@ -30,10 +30,7 @@ typedef struct Queue {
 typedef struct Elevator {
     State state;    
     int current_floor; //starting from 0
-    bool floor_sensor_triggered;
-    bool emergency_stop;
-    bool door_open;
-    bool direction; //true is up
+    bool direction_from_floor_up; //true is up
     bool lights_updated;    
     Queue queue;
 }  Elevator;
@@ -45,9 +42,7 @@ void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator);
 
 bool queueCheckIfAnyOrderExist(Elevator *elevator);
 
-void queueClearAllOrdersOnFloor(int floor, Elevator *elevator);
-
-void queueRemoveElementFromQueue(bool queue[], int floor);
+void queueClearAllOrdersOnFloor(int floor, Elevator *elevator); 
 
 bool queueCheckIfAnyOrderOnFloor(int floor, Queue queue);
 
