@@ -1,0 +1,185 @@
+\hypertarget{queue_8h}{}\section{source/queue.h File Reference}
+\label{queue_8h}\index{source/queue.\+h@{source/queue.\+h}}
+
+
+Module for elevator queue setup and handling.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}elevator.\+h\char`\"{}}\newline
+Include dependency graph for queue.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{queue_8h_ac634f464412ed92a2eb3c2f3a37ba817}{queue\+Update\+From\+Buttons} (\hyperlink{structElevator}{Elevator} $\ast$elevator)
+\begin{DoxyCompactList}\small\item\em Reads all order buttons and and calls queue\+Add\+Order\+To\+Queue for each pending order. \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_a2ef008c25a708651236882509d080ea0}{queue\+Add\+Order\+To\+Queue} (int floor, \hyperlink{hardware_8h_a796a8de8ce0ae769d7dbd3327a7bdbe7}{Hardware\+Order} order, \hyperlink{structElevator}{Elevator} $\ast$elevator)
+\begin{DoxyCompactList}\small\item\em Adds order to queue in \hyperlink{structElevator}{Elevator} struct. \end{DoxyCompactList}\item 
+bool \hyperlink{queue_8h_a7d471d8e4db5d90e2f9297e4f903540a}{queue\+Check\+If\+Any\+Order\+Exist} (\hyperlink{structElevator}{Elevator} $\ast$elevator)
+\begin{DoxyCompactList}\small\item\em Checks if there are any orders left in the queue. \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_aa3563a91fbb2fc7799d1a40d9cb766d5}{queue\+Clear\+All\+Orders\+On\+Floor} (int floor, \hyperlink{structElevator}{Elevator} $\ast$elevator)
+\begin{DoxyCompactList}\small\item\em Removes all orders in que for a specific floor. \end{DoxyCompactList}\item 
+bool \hyperlink{queue_8h_a19678d98f1a81a202d6489cd4adcae55}{queue\+Check\+If\+Any\+Order\+On\+Floor} (int floor, \hyperlink{structQueue}{Queue} queue)
+\begin{DoxyCompactList}\small\item\em Checks if there\textquotesingle{}s any orders on specific floor for all the three queues. \end{DoxyCompactList}\item 
+void \hyperlink{queue_8h_a86d71e64f8652e5276dc3e3b3ad06c28}{queue\+Clear\+All\+Orders} (\hyperlink{structElevator}{Elevator} $\ast$elevator)
+\begin{DoxyCompactList}\small\item\em Clears all orders. \end{DoxyCompactList}\item 
+bool \hyperlink{queue_8h_a6cfa06a8e327f36ec9d99a36c21a9c62}{queue\+Check\+If\+Order\+In\+Same\+Direction} (\hyperlink{structQueue}{Queue} queue, int current\+\_\+floor, bool direction)
+\begin{DoxyCompactList}\small\item\em Checks if it exists an order in the same direction, or inside the cabinette for a given floor. \end{DoxyCompactList}\item 
+bool \hyperlink{queue_8h_ab3e7b979e7b1103e0d25618da7d17756}{queue\+Check\+If\+Last\+Order\+In\+Direction} (\hyperlink{structElevator}{Elevator} $\ast$elevator)
+\begin{DoxyCompactList}\small\item\em Checks if the order is the last one in the current direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module for elevator queue setup and handling. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{queue_8h_a2ef008c25a708651236882509d080ea0}\label{queue_8h_a2ef008c25a708651236882509d080ea0}} 
+\index{queue.\+h@{queue.\+h}!queue\+Add\+Order\+To\+Queue@{queue\+Add\+Order\+To\+Queue}}
+\index{queue\+Add\+Order\+To\+Queue@{queue\+Add\+Order\+To\+Queue}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Add\+Order\+To\+Queue()}{queueAddOrderToQueue()}}
+{\footnotesize\ttfamily void queue\+Add\+Order\+To\+Queue (\begin{DoxyParamCaption}\item[{int}]{floor,  }\item[{\hyperlink{hardware_8h_a796a8de8ce0ae769d7dbd3327a7bdbe7}{Hardware\+Order}}]{order,  }\item[{\hyperlink{structElevator}{Elevator} $\ast$}]{elevator }\end{DoxyParamCaption})}
+
+
+
+Adds order to queue in \hyperlink{structElevator}{Elevator} struct. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em floor} & Floor index \\
+\hline
+\mbox{\tt in}  & {\em order} & Order type used to place order in up, down or inside queue \\
+\hline
+\mbox{\tt out}  & {\em elevator} & Pointer to elevator that holds the queue \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queue_8h_a7d471d8e4db5d90e2f9297e4f903540a}\label{queue_8h_a7d471d8e4db5d90e2f9297e4f903540a}} 
+\index{queue.\+h@{queue.\+h}!queue\+Check\+If\+Any\+Order\+Exist@{queue\+Check\+If\+Any\+Order\+Exist}}
+\index{queue\+Check\+If\+Any\+Order\+Exist@{queue\+Check\+If\+Any\+Order\+Exist}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Check\+If\+Any\+Order\+Exist()}{queueCheckIfAnyOrderExist()}}
+{\footnotesize\ttfamily bool queue\+Check\+If\+Any\+Order\+Exist (\begin{DoxyParamCaption}\item[{\hyperlink{structElevator}{Elevator} $\ast$}]{elevator }\end{DoxyParamCaption})}
+
+
+
+Checks if there are any orders left in the queue. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em elevator} & Pointer to elevator that holds the queue\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if the up,down,inside queues has any order. false, if they hasn\textquotesingle{}t. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queue_8h_a19678d98f1a81a202d6489cd4adcae55}\label{queue_8h_a19678d98f1a81a202d6489cd4adcae55}} 
+\index{queue.\+h@{queue.\+h}!queue\+Check\+If\+Any\+Order\+On\+Floor@{queue\+Check\+If\+Any\+Order\+On\+Floor}}
+\index{queue\+Check\+If\+Any\+Order\+On\+Floor@{queue\+Check\+If\+Any\+Order\+On\+Floor}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Check\+If\+Any\+Order\+On\+Floor()}{queueCheckIfAnyOrderOnFloor()}}
+{\footnotesize\ttfamily bool queue\+Check\+If\+Any\+Order\+On\+Floor (\begin{DoxyParamCaption}\item[{int}]{floor,  }\item[{\hyperlink{structQueue}{Queue}}]{queue }\end{DoxyParamCaption})}
+
+
+
+Checks if there\textquotesingle{}s any orders on specific floor for all the three queues. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em floor} & Floor index \\
+\hline
+\mbox{\tt in}  & {\em queue} & \hyperlink{structQueue}{Queue} with all orders\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, on success. false, if no order was found. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queue_8h_ab3e7b979e7b1103e0d25618da7d17756}\label{queue_8h_ab3e7b979e7b1103e0d25618da7d17756}} 
+\index{queue.\+h@{queue.\+h}!queue\+Check\+If\+Last\+Order\+In\+Direction@{queue\+Check\+If\+Last\+Order\+In\+Direction}}
+\index{queue\+Check\+If\+Last\+Order\+In\+Direction@{queue\+Check\+If\+Last\+Order\+In\+Direction}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Check\+If\+Last\+Order\+In\+Direction()}{queueCheckIfLastOrderInDirection()}}
+{\footnotesize\ttfamily bool queue\+Check\+If\+Last\+Order\+In\+Direction (\begin{DoxyParamCaption}\item[{\hyperlink{structElevator}{Elevator} $\ast$}]{elevator }\end{DoxyParamCaption})}
+
+
+
+Checks if the order is the last one in the current direction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em elevator} & Pointer to elevator that holds the queue\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, on success. false, else 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queue_8h_a6cfa06a8e327f36ec9d99a36c21a9c62}\label{queue_8h_a6cfa06a8e327f36ec9d99a36c21a9c62}} 
+\index{queue.\+h@{queue.\+h}!queue\+Check\+If\+Order\+In\+Same\+Direction@{queue\+Check\+If\+Order\+In\+Same\+Direction}}
+\index{queue\+Check\+If\+Order\+In\+Same\+Direction@{queue\+Check\+If\+Order\+In\+Same\+Direction}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Check\+If\+Order\+In\+Same\+Direction()}{queueCheckIfOrderInSameDirection()}}
+{\footnotesize\ttfamily bool queue\+Check\+If\+Order\+In\+Same\+Direction (\begin{DoxyParamCaption}\item[{\hyperlink{structQueue}{Queue}}]{queue,  }\item[{int}]{current\+\_\+floor,  }\item[{bool}]{direction }\end{DoxyParamCaption})}
+
+
+
+Checks if it exists an order in the same direction, or inside the cabinette for a given floor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em queue} & \hyperlink{structQueue}{Queue} with all orders \\
+\hline
+\mbox{\tt in}  & {\em current\+\_\+floor} & Current floor for the elevator \\
+\hline
+\mbox{\tt in}  & {\em direction} & \hyperlink{structElevator}{Elevator} heading\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, on success. false, if no order was found. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queue_8h_a86d71e64f8652e5276dc3e3b3ad06c28}\label{queue_8h_a86d71e64f8652e5276dc3e3b3ad06c28}} 
+\index{queue.\+h@{queue.\+h}!queue\+Clear\+All\+Orders@{queue\+Clear\+All\+Orders}}
+\index{queue\+Clear\+All\+Orders@{queue\+Clear\+All\+Orders}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Clear\+All\+Orders()}{queueClearAllOrders()}}
+{\footnotesize\ttfamily void queue\+Clear\+All\+Orders (\begin{DoxyParamCaption}\item[{\hyperlink{structElevator}{Elevator} $\ast$}]{elevator }\end{DoxyParamCaption})}
+
+
+
+Clears all orders. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em elevator} & Pointer to elevator that holds the queue with orders \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queue_8h_aa3563a91fbb2fc7799d1a40d9cb766d5}\label{queue_8h_aa3563a91fbb2fc7799d1a40d9cb766d5}} 
+\index{queue.\+h@{queue.\+h}!queue\+Clear\+All\+Orders\+On\+Floor@{queue\+Clear\+All\+Orders\+On\+Floor}}
+\index{queue\+Clear\+All\+Orders\+On\+Floor@{queue\+Clear\+All\+Orders\+On\+Floor}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Clear\+All\+Orders\+On\+Floor()}{queueClearAllOrdersOnFloor()}}
+{\footnotesize\ttfamily void queue\+Clear\+All\+Orders\+On\+Floor (\begin{DoxyParamCaption}\item[{int}]{floor,  }\item[{\hyperlink{structElevator}{Elevator} $\ast$}]{elevator }\end{DoxyParamCaption})}
+
+
+
+Removes all orders in que for a specific floor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em floor} & Floor index \\
+\hline
+\mbox{\tt out}  & {\em elevator} & Pointer to elevator that holds the queue \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queue_8h_ac634f464412ed92a2eb3c2f3a37ba817}\label{queue_8h_ac634f464412ed92a2eb3c2f3a37ba817}} 
+\index{queue.\+h@{queue.\+h}!queue\+Update\+From\+Buttons@{queue\+Update\+From\+Buttons}}
+\index{queue\+Update\+From\+Buttons@{queue\+Update\+From\+Buttons}!queue.\+h@{queue.\+h}}
+\subsubsection{\texorpdfstring{queue\+Update\+From\+Buttons()}{queueUpdateFromButtons()}}
+{\footnotesize\ttfamily void queue\+Update\+From\+Buttons (\begin{DoxyParamCaption}\item[{\hyperlink{structElevator}{Elevator} $\ast$}]{elevator }\end{DoxyParamCaption})}
+
+
+
+Reads all order buttons and and calls queue\+Add\+Order\+To\+Queue for each pending order. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em elevator} & Pointer to elevator that holds the queue \\
+\hline
+\end{DoxyParams}
