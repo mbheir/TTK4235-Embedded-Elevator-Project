@@ -6,7 +6,7 @@
 #define ELEVATOR_H
 
 #include <stdbool.h>
-#include "queue.h"
+#include "hardware.h"
 
 /**
  * @brief An enum to represent the different states the elevator can achieve.
