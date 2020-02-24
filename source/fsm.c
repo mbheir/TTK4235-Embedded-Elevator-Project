@@ -1,5 +1,6 @@
 /**
  * @file
+ * @brief Implementation file for the Finite State Machine.
  */
 
 #include "fsm.h"
@@ -10,7 +11,7 @@ void fsmInit(Elevator *elevator) {
     queueClearAllOrders(elevator);
     elevator->direction_from_floor_up = false;
     elevator->lights_updated = false;
-    elevator->current_floor = -1;
+    elevator->current_floor = ELEVATOR_INIT_FLOOR;
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true) {
@@ -19,7 +20,7 @@ void fsmInit(Elevator *elevator) {
 		    break;
         }
 
-        if (checkAndUpdateFloor(elevator)) {
+        if (elevatorCheckIfOnAFloorAndUpdate(elevator)) {
             elevator->state = STANDBY;
             break;
         }
@@ -121,7 +122,7 @@ void fsmGoingUp(Elevator *elevator) {
                 elevator->lights_updated = true;
             }
 
-            if (   checkAndUpdateFloor(elevator) 
+            if (   elevatorCheckIfOnAFloorAndUpdate(elevator) 
                 && ((elevator->queue.up[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) 
                 || (queueCheckIfLastOrderInDirection(elevator) && elevator->queue.down[elevator->current_floor]))) 
             {
@@ -141,7 +142,7 @@ void fsmGoingDown(Elevator *elevator) {
     hardwareCommandMovement(HARDWARE_MOVEMENT_DOWN);
 
     while (true){
-        if (hardwareReadStopSignal() == 1){
+        if (hardwareReadStopSignal()){
             elevator->state = EMERGENCY;
             break;
         }
@@ -152,7 +153,7 @@ void fsmGoingDown(Elevator *elevator) {
             elevator->lights_updated = true;
         }
 
-        if (checkAndUpdateFloor(elevator) 
+        if (elevatorCheckIfOnAFloorAndUpdate(elevator) 
             && ((elevator->queue.down[elevator->current_floor] || elevator->queue.inside[elevator->current_floor]) 
             || (queueCheckIfLastOrderInDirection(elevator) && elevator->queue.up[elevator->current_floor]))) 
         {
@@ -174,7 +175,7 @@ void fsmEmergency(Elevator *elevator){
 
 	while(hardwareReadStopSignal()){}
 	
-    if(elevator->current_floor != -1) {
+    if(elevator->current_floor != ELEVATOR_INIT_FLOOR) {
 
         if(hardwareReadFloorSensor(elevator->current_floor)){
             elevator->state = DOORS_OPEN;

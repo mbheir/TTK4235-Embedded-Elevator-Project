@@ -1,3 +1,7 @@
+/**
+ * @file 
+ * @brief Implementation file for the queue library
+ */
 #include "queue.h"
 
 void queueUpdateFromButtons(Elevator *elevator) {

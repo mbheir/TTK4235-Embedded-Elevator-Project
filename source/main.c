@@ -1,11 +1,16 @@
+/** 
+ * @file
+ * @brief Main file of the elevator application
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "hardware.h"
 #include "elevator.h"
-#include "fsm.h"
 #include "queue.h"
 #include "LightControl.h"
+#include "fsm.h"
 
 int main(){
     bool error = hardwareInit();

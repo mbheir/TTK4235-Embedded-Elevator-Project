@@ -1,38 +1,59 @@
 /**
  * @file
- * @brief Elevator objekt
+ * @brief Elevators struckts setup, and functions directly handeling with the state variables. 
  */
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
+#define ELEVATOR_INIT_FLOOR -1
+
 #include <stdbool.h>
-#include "queue.h"
-
-// typedef enum State { 
-//     STANDBY, 
-//     DOORS_OPEN, 
-//     GOING_UP, 
-//     GOING_DOWN, 
-//     EMERGENCY
-// } State;
+#include "hardware.h"
 
 
-// typedef struct Queue {
-//     bool up[4];
-//     bool down[4];
-//     bool inside[4];
-// } Queue;
+/**
+ * @brief An enum to represent the different states the elevator can achieve.
+ */
+typedef enum {
+    INIT, 
+    STANDBY, 
+    DOORS_OPEN, 
+    GOING_UP, 
+    GOING_DOWN, 
+    EMERGENCY
+} State;
+
+/**
+ * @brief A structure to hold the incoming orders. Holds three different arrays depening on where the order is from.
+ */
+typedef struct Queue {
+    bool up[4];                 /** < upgoing orders */
+    bool down[4];               /** < downgoing orders */
+    bool inside[4];             /** < orders coming from inside the cab */ 
+} Queue;
+
+
+/**
+ * @brief A structure to represent the elevators state variables.  
+ */
+typedef struct Elevator {
+    State state;                    /** < The elevators current state. */
+    int current_floor;              /** < The elevators current floor.  */ 
+    bool direction_from_floor_up;   /** < Outgoing direction of the last visited floor, true is up */
+    bool lights_updated;            /** < Indicates whether the order-lights have been updated for the elevator-system */
+    Queue queue;                    /** < The elevators list of active orders */
+} Elevator;
 
 
 
-// typedef struct Elevator {
-//     State state;    
-//     int current_floor;
-//     bool floor_sensor_triggered;
-//     bool emergency_stop;
-//     bool door_open;
-//     bool last_direction;
-//     Queue queue;
-// }  Elevator;
+
+/**
+ * @brief Checks whether the elevator is on a floor, and updates the elevators current_floor state variable.
+ * 
+ * @param[out] elevator     Pointer to Elevator object that holds current_floor state variable
+ * 
+ * @return true, if on a floor. false, else
+ */
+bool elevatorCheckIfOnAFloorAndUpdate(Elevator *elevator);
 
 #endif

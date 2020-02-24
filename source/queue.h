@@ -1,40 +1,15 @@
 /**
  * @file
- * @brief Module for elevator queue setup and handling
+ * @brief Simple library for doing operations on the elevators queue. 
  */
 #ifndef QUEUE_H
 #define QUEUE_H
 
 #include <stdbool.h>
 #include "hardware.h"
-//#include "elevator.h"
+#include "elevator.h"
 
 
-typedef enum {
-    INIT, 
-    STANDBY, 
-    DOORS_OPEN, 
-    GOING_UP, 
-    GOING_DOWN, 
-    EMERGENCY
-} State;
-
-
-typedef struct Queue {
-    bool up[4];
-    bool down[4];
-    bool inside[4];
-} Queue;
-
-
-
-typedef struct Elevator {
-    State state;    
-    int current_floor; //starting from 0
-    bool direction_from_floor_up; //true is up
-    bool lights_updated;    
-    Queue queue;
-}  Elevator;
 
 /**
  * @brief Reads all order buttons and and calls queueAddOrderToQueue for each pending order 
@@ -42,6 +17,7 @@ typedef struct Elevator {
  * @param[out] elevator     Pointer to elevator that holds the queue
  */
 void queueUpdateFromButtons(Elevator *elevator);
+
 
 /**
  * @brief Adds order to queue in Elevator struct
@@ -51,6 +27,7 @@ void queueUpdateFromButtons(Elevator *elevator);
  * @param[out] elevator     Pointer to elevator that holds the queue
  */
 void queueAddOrderToQueue(int floor, HardwareOrder order, Elevator *elevator);
+
 
 /**
  * @brief Checks if there are any orders left in the queue
@@ -81,12 +58,14 @@ void queueClearAllOrdersOnFloor(int floor, Elevator *elevator);
  */
 bool queueCheckIfAnyOrderOnFloor(int floor, Queue queue);
 
+
 /**
  * @brief Clears all orders
  *
  * @param[out] elevator     Pointer to elevator that holds the queue with orders
  */
 void queueClearAllOrders(Elevator *elevator);
+
 
 /**
  * @brief Checks if it exists an order in the same direction, or inside the cabinette for a given floor.
@@ -98,6 +77,7 @@ void queueClearAllOrders(Elevator *elevator);
  * @return true, on success. false, if no order was found.
  */
 bool queueCheckIfOrderInSameDirection(Queue queue, int current_floor, bool direction);
+
 
 /**
  * @brief Checks if the order is the last one in the current direction
