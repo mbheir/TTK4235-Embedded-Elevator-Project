@@ -1,12 +1,15 @@
 /**
  * @file
- * @brief Elevator object
+ * @brief Elevators struckts setup, and functions directly handeling with the state variables. 
  */
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
+#define ELEVATOR_INIT_FLOOR -1
+
 #include <stdbool.h>
-#include "queue.h"
+#include "hardware.h"
+
 
 /**
  * @brief An enum to represent the different states the elevator can achieve.
@@ -21,7 +24,7 @@ typedef enum {
 } State;
 
 /**
- * @brief A structure to represent the queue. Holds three different arrays depening on where the order is from.
+ * @brief A structure to hold the incoming orders. Holds three different arrays depening on where the order is from.
  */
 typedef struct Queue {
     bool up[4];                 /** < upgoing orders */
@@ -35,13 +38,22 @@ typedef struct Queue {
  */
 typedef struct Elevator {
     State state;                    /** < The elevators current state. */
-    int current_floor;              /** < The elevators current floor. -1 indicates uninitialized */ 
+    int current_floor;              /** < The elevators current floor.  */ 
     bool direction_from_floor_up;   /** < Outgoing direction of the last visited floor, true is up */
     bool lights_updated;            /** < Indicates whether the order-lights have been updated for the elevator-system */
-    Queue queue;                    /** < The elevators order queue */
-}  Elevator;
+    Queue queue;                    /** < The elevators list of active orders */
+} Elevator;
 
 
-bool checkAndUpdateFloor(Elevator *elevator);
+
+
+/**
+ * @brief Checks whether the elevator is on a floor, and updates the elevators current_floor state variable.
+ * 
+ * @param[out] elevator     Pointer to Elevator object that holds current_floor state variable
+ * 
+ * @return true, if on a floor. false, else
+ */
+bool elevatorCheckIfOnAFloorAndUpdate(Elevator *elevator);
 
 #endif

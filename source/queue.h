@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief Module for elevator queue setup and handling
+ * @brief Simple library for doing operations on the elevators queue. 
  */
 #ifndef QUEUE_H
 #define QUEUE_H
