@@ -4,3 +4,4 @@ html/
 latex/
 .vscode/
 source/.vscode/
+.queue.c.swp
