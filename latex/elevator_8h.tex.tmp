@@ -1,0 +1,54 @@
+\hypertarget{elevator_8h}{}\section{source/elevator.h File Reference}
+\label{elevator_8h}\index{source/elevator.\+h@{source/elevator.\+h}}
+
+
+\hyperlink{structElevator}{Elevator} object.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+Include dependency graph for elevator.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structQueue}{Queue}
+\begin{DoxyCompactList}\small\item\em A structure to represent the queue. Holds three different arrays depening on where the order is from. \end{DoxyCompactList}\item 
+struct \hyperlink{structElevator}{Elevator}
+\begin{DoxyCompactList}\small\item\em A structure to represent the elevators state variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{elevator_8h_ad359c9a9ed21445fd95e01a05429c767}\label{elevator_8h_ad359c9a9ed21445fd95e01a05429c767}} 
+typedef struct \hyperlink{structQueue}{Queue} \hyperlink{elevator_8h_ad359c9a9ed21445fd95e01a05429c767}{Queue}
+\begin{DoxyCompactList}\small\item\em A structure to represent the queue. Holds three different arrays depening on where the order is from. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{elevator_8h_a92e4eda6bd1407129a0c3639c6d23a6f}\label{elevator_8h_a92e4eda6bd1407129a0c3639c6d23a6f}} 
+typedef struct \hyperlink{structElevator}{Elevator} \hyperlink{elevator_8h_a92e4eda6bd1407129a0c3639c6d23a6f}{Elevator}
+\begin{DoxyCompactList}\small\item\em A structure to represent the elevators state variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{elevator_8h_a5d74787dedbc4e11c1ab15bf487e61f8}\label{elevator_8h_a5d74787dedbc4e11c1ab15bf487e61f8}} 
+enum \hyperlink{elevator_8h_a5d74787dedbc4e11c1ab15bf487e61f8}{State} \{ \newline
+{\bfseries I\+N\+IT}, 
+{\bfseries S\+T\+A\+N\+D\+BY}, 
+{\bfseries D\+O\+O\+R\+S\+\_\+\+O\+P\+EN}, 
+{\bfseries G\+O\+I\+N\+G\+\_\+\+UP}, 
+\newline
+{\bfseries G\+O\+I\+N\+G\+\_\+\+D\+O\+WN}, 
+{\bfseries E\+M\+E\+R\+G\+E\+N\+CY}
+ \}\begin{DoxyCompactList}\small\item\em An enum to represent the different states the elevator can achieve. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{elevator_8h_af71ec87d0500f3d837274ab3ffc5f9c8}\label{elevator_8h_af71ec87d0500f3d837274ab3ffc5f9c8}} 
+bool {\bfseries check\+And\+Update\+Floor} (\hyperlink{structElevator}{Elevator} $\ast$elevator)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{structElevator}{Elevator} object. 
+
