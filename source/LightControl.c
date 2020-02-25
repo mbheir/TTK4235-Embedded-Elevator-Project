@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Implementation file for LightControl.h
+ */
 #include "LightControl.h"
 
 void lightUpdateFromQueue(Queue queue) {

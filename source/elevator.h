@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief Elevators struckts setup, and functions directly handeling with the state variables. 
+ * @brief Elevator and queue struct setup, and functions directly handling with the state variables. 
  */
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
