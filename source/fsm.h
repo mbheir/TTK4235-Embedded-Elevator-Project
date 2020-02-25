@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <time.h>
-#include "hardware.h"
+
 #include "LightControl.h"
 #include "queue.h"
 
