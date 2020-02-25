@@ -1,5 +1,5 @@
 SIM := true
-SOURCES := main.c fsm.c queue.c LightControl.c elevator.c
+SOURCES := main.c fsm.c queue.c elevator.c
 
 SOURCE_DIR := source
 BUILD_DIR := build

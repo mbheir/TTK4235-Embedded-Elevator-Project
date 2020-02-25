@@ -32,7 +32,7 @@ void fsmInit(Elevator *elevator) {
 void fsmStandby(Elevator *elevator) {
     printf("Entering state STANDBY\n");
 
-    while (elevator->state == STANDBY) {
+    while (true) {
 	if (hardwareReadStopSignal()){
 		elevator->state = EMERGENCY;
 		break;
@@ -40,7 +40,7 @@ void fsmStandby(Elevator *elevator) {
         queueUpdateFromButtons(elevator);
 	
         if (!elevator->lights_updated) {
-            lightUpdateFromQueue(elevator->queue);
+            elevatorUpdateOrderLights(elevator->queue);
             elevator->lights_updated = true;
         }
 
@@ -87,7 +87,7 @@ void fsmDoorsOpen(Elevator *elevator) {
 
         queueUpdateFromButtons(elevator);
         if (!elevator->lights_updated) {
-            lightUpdateFromQueue(elevator->queue);
+            elevatorUpdateOrderLights(elevator->queue);
             elevator->lights_updated = true;
         }
 
@@ -118,7 +118,7 @@ void fsmGoingUp(Elevator *elevator) {
         }	    
             queueUpdateFromButtons(elevator);
             if (!elevator->lights_updated) {
-                lightUpdateFromQueue(elevator->queue);
+                elevatorUpdateOrderLights(elevator->queue);
                 elevator->lights_updated = true;
             }
 
@@ -149,7 +149,7 @@ void fsmGoingDown(Elevator *elevator) {
         
         queueUpdateFromButtons(elevator);
         if (!elevator->lights_updated) {
-            lightUpdateFromQueue(elevator->queue);
+            elevatorUpdateOrderLights(elevator->queue);
             elevator->lights_updated = true;
         }
 

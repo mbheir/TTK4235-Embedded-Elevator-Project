@@ -27,9 +27,9 @@ typedef enum {
  * @brief A structure to hold the incoming orders. Holds three different arrays depening on where the order is from.
  */
 typedef struct Queue {
-    bool up[4];                 /** < upgoing orders */
-    bool down[4];               /** < downgoing orders */
-    bool inside[4];             /** < orders coming from inside the cab */ 
+    bool up[4];                 /**< upgoing orders */
+    bool down[4];               /**< downgoing orders */
+    bool inside[4];             /**< orders coming from inside the cab */ 
 } Queue;
 
 
@@ -37,11 +37,11 @@ typedef struct Queue {
  * @brief A structure to represent the elevators state variables.  
  */
 typedef struct Elevator {
-    State state;                    /** < The elevators current state. */
-    int current_floor;              /** < The elevators current floor.  */ 
-    bool direction_from_floor_up;   /** < Outgoing direction of the last visited floor, true is up */
-    bool lights_updated;            /** < Indicates whether the order-lights have been updated for the elevator-system */
-    Queue queue;                    /** < The elevators list of active orders */
+    State state;                    /**< The elevators current state. */
+    int current_floor;              /**< The elevators current floor.  */ 
+    bool direction_from_floor_up;   /**< Outgoing direction of the last visited floor, true is up */
+    bool lights_updated;            /**< Indicates whether the order-lights have been updated for the elevator-system */
+    Queue queue;                    /**< The elevators list of active orders */
 } Elevator;
 
 
@@ -50,10 +50,17 @@ typedef struct Elevator {
 /**
  * @brief Checks whether the elevator is on a floor, and updates the elevators current_floor state variable.
  * 
- * @param[out] elevator     Pointer to Elevator object that holds current_floor state variable
+ * @param[out] elevator     Pointer to Elevator that holds current_floor state variable
  * 
  * @return true, if on a floor. false, else
  */
 bool elevatorCheckIfOnAFloorAndUpdate(Elevator *elevator);
+
+
+/**
+ * @brief Turns on or off light based on orders in queue
+ * @param[in] queue Queue with orders
+ */
+void elevatorUpdateOrderLights(Queue queue);
 
 #endif
