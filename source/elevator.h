@@ -27,9 +27,9 @@ typedef enum {
  * @brief A structure to hold the incoming orders. Holds three different arrays depening on where the order is from.
  */
 typedef struct Queue {
-    bool up[4];                 /**< upgoing orders */
-    bool down[4];               /**< downgoing orders */
-    bool inside[4];             /**< orders coming from inside the cab */ 
+    bool up[HARDWARE_NUMBER_OF_FLOORS];                 /**< upgoing orders */
+    bool down[HARDWARE_NUMBER_OF_FLOORS];               /**< downgoing orders */
+    bool inside[HARDWARE_NUMBER_OF_FLOORS];             /**< orders coming from inside the cab */ 
 } Queue;
 
 
