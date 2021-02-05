@@ -1,7 +1,7 @@
-# Heisprosjekt Tilpassede datasystemer vår 2020
+# Heisprosjekt Tilpassede Datasystemer vår 2020
 
 ## Beksrivelse
-
+Prosjektet gikk ut på å lage et system for en heis som kunne motta og fullføre ordre. 
 
 Klassediagram
  * https://www.draw.io/#G1MttLVv_8gQIj8ZFV_txyF4YXlhMJH5kU
