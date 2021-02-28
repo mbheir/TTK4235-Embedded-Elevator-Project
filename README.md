@@ -1,7 +1,8 @@
-# Heisprosjekt Tilpassede Datasystemer vår 2020
+# Elevator Project in TTK4235 - Embedded Systems
 
-## Beskrivelse
-Prosjektet gikk ut på å lage et system for en heis som kunne motta og fullføre ordre. 
+## Description
+The goal of this project was to create a program for a controlling a single elevator in C.
+
 
 Klassediagram
  * https://www.draw.io/#G1MttLVv_8gQIj8ZFV_txyF4YXlhMJH5kU
