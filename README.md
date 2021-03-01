@@ -1,7 +1,7 @@
 # Elevator Project in TTK4235 - Embedded Systems
 
 ## Description
-The goal of this project was to create a program for a controlling a single elevator in C.
+The goal of this project was to create a program for a controlling a single elevator across n floors, 
 
 
 Klassediagram
