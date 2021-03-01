@@ -9,6 +9,6 @@ The underlying design is based on a simple state machine structure
 ## Instructions
 
 1. Clone the repolistory
-2. To run on the simulator, set SIM=true in Makefile. To run on the lab, set SIM=false. 
+2. To run on the simulator, set `SIM=true` in Makefile, and run the simulator using `./SimulatorServer`.
 3. Run `make`, to build executable
 4. Run ```./elevator``` to run the executable
