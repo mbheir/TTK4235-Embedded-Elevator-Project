@@ -8,7 +8,7 @@ The underlying design is based on a simple state machine structure
 ![image](https://user-images.githubusercontent.com/55540484/109494767-9f361b00-7a8e-11eb-8137-5b507543065e.png)
 ## Instructions
 
-1. Clone the repolistory
-2. To run on the simulator, set `SIM=true` in Makefile, and run the simulator using `./SimElevatorServer`.
-3. Run `make`, to build executable
-4. Run ```./elevator``` to run the executable
+
+1. To use with the simulator, set `SIM=true` in Makefile and build using `make`.
+2. Run `./SimElevatorServer` to start simulator. 
+4. Run ```./elevator``` to run the controller code. 
